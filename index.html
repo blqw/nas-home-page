@@ -498,7 +498,6 @@
             a.target = "_self";
             a.onclick = e => {
                 let = url = (e.altKey ? item.purl || a.href : a.href) || "about:blank";
-                alert(url);
                 if (e.ctrlKey) {
                     window.open(url);
                     return false;
