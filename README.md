@@ -7,6 +7,7 @@ NAS自建导航页
 3. 可以自动识别内网环境，使用内网地址访问
 4. 部署简单,单文件
 5. [demo](https://blqw.github.io/nas-home-page/)
+
 # 效果
 ![](img/0.png)
 ![](img/01.png)
