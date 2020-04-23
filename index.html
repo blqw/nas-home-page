@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title></title>
+    <!-- 动画 -->
+    <style>
+        @keyframes shake-bounce {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                transform: rotate(0);
+                -ms-transform: rotate(0)
+            }
+
+            25% {
+                -webkit-transform: rotate(15deg);
+                -moz-transform: rotate(15deg);
+                transform: rotate(15deg);
+                -ms-transform: rotate(15deg)
+            }
+
+            50% {
+                -webkit-transform: rotate(-15deg);
+                -moz-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+                -ms-transform: rotate(-15deg)
+            }
+
+            75% {
+                -webkit-transform: rotate(5deg);
+                -moz-transform: rotate(5deg);
+                transform: rotate(5deg);
+                -ms-transform: rotate(5deg)
+            }
+
+            85% {
+                /* -webkit-transform:rotate(-5deg); */
+                -moz-transform: rotate(-5deg);
+                /* transform:rotate(-5deg); */
+                -ms-transform: rotate(-5deg);
+            }
+        }
+
+        @-webkit-keyframes shake-bounce {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                transform: rotate(0);
+                -ms-transform: rotate(0)
+            }
+
+            25% {
+                -webkit-transform: rotate(15deg);
+                -moz-transform: rotate(15deg);
+                transform: rotate(15deg);
+                -ms-transform: rotate(15deg)
+            }
+
+            50% {
+                -webkit-transform: rotate(-15deg);
+                -moz-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+                -ms-transform: rotate(-15deg)
+            }
+
+            75% {
+                -webkit-transform: rotate(5deg);
+                -moz-transform: rotate(5deg);
+                transform: rotate(5deg);
+                -ms-transform: rotate(5deg)
+            }
+
+            85% {
+                -webkit-transform: rotate(-5deg);
+                -moz-transform: rotate(-5deg);
+                transform: rotate(-5deg);
+                -ms-transform: rotate(-5deg)
+            }
+        }
+
+        @-moz-keyframes shake-bounce {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                transform: rotate(0);
+                -ms-transform: rotate(0)
+            }
+
+            25% {
+                -webkit-transform: rotate(15deg);
+                -moz-transform: rotate(15deg);
+                transform: rotate(15deg);
+                -ms-transform: rotate(15deg)
+            }
+
+            50% {
+                -webkit-transform: rotate(-15deg);
+                -moz-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+                -ms-transform: rotate(-15deg)
+            }
+
+            75% {
+                -webkit-transform: rotate(5deg);
+                -moz-transform: rotate(5deg);
+                transform: rotate(5deg);
+                -ms-transform: rotate(5deg)
+            }
+
+            85% {
+                -webkit-transform: rotate(-5deg);
+                -moz-transform: rotate(-5deg);
+                transform: rotate(-5deg);
+                -ms-transform: rotate(-5deg)
+            }
+        }
+
+        @-o-keyframes shake-bounce {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                transform: rotate(0);
+                -ms-transform: rotate(0)
+            }
+
+            25% {
+                -webkit-transform: rotate(15deg);
+                -moz-transform: rotate(15deg);
+                transform: rotate(15deg);
+                -ms-transform: rotate(15deg)
+            }
+
+            50% {
+                -webkit-transform: rotate(-15deg);
+                -moz-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+                -ms-transform: rotate(-15deg)
+            }
+
+            75% {
+                -webkit-transform: rotate(5deg);
+                -moz-transform: rotate(5deg);
+                transform: rotate(5deg);
+                -ms-transform: rotate(5deg)
+            }
+
+            85% {
+                -webkit-transform: rotate(-5deg);
+                -moz-transform: rotate(-5deg);
+                transform: rotate(-5deg);
+                -ms-transform: rotate(-5deg)
+            }
+        }
+
+        @keyframes loading {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <style id="open-app">
+        @keyframes open-app {
+            100% {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 一般样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        *::-webkit-scrollbar {
+            display: none
+        }
+
+        html {
+            min-width: 640px;
+        }
+
+        body {
+            background-image: linear-gradient(to bottom, #061e2b 0, #0f2937 1px, transparent 1px), linear-gradient(to right, #0f2937 0, #0f2937 1px, transparent 1px);
+            background-size: 25px 25px;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-position: bottom;
+            background-color: #111;
+            min-width: 640px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #DDD;
+        }
+
+        .openapp {
+            background: white;
+            position: absolute;
+            z-index: 1000;
+            animation: open-app .2s forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .openapp svg {
+            animation: loading 3s infinite linear;
+        }
+
+        #main {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        #main .topbar {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            background-color: #444;
+            color: #DDD;
+            font-size: 1em;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #main .topbar .left {
+            padding-left: 1em;
+            float: left;
+        }
+
+        #main .topbar .right {
+            padding-right: 1em;
+            float: right;
+        }
+
+        #main .topbar .middle {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+
+        #main .content {
+            width: 100%;
+            height: calc(100% - 30px - 165px);
+            overflow-y: scroll;
+        }
+
+        .content .grid {
+            margin-top: 1.5em;
+        }
+
+        .content .grid strong {
+            line-height: 3em;
+        }
+
+        .grid {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .grid .app {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+        }
+
+        .grid a {
+            width: 100%;
+            height: 100%;
+        }
+
+        .grid a>* {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .grid span {
+            display: flex block;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+            /* min-width: 96px; */
+            -webkit-animation-name: shake;
+            animation-name: shake;
+        }
+
+        .grid span:hover {
+            -webkit-animation: shake-bounce .5s alternate;
+            -moz-animation: shake-bounce .5s alternate;
+            -o-animation: shake-bounce .5s alternate;
+            animation: shake-bounce .5s alternate;
+        }
+
+        #main .footerbar {
+            width: 100%;
+            height: 165px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-content: center;
+        }
+
+        #main .footerbar .grid {
+            position: absolute;
+            bottom: .3em;
+            width: 100%;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+        }
+
+        #main .footerbar .background {
+            width: 90%;
+            height: 50%;
+            margin: 0 auto;
+            background-color: white;
+            opacity: 0.3;
+            display: block;
+            border-radius: 30px;
+            z-index: 10;
+        }
+
+        #main .footerbar .copyright {
+            width: 100%;
+            z-index: 30;
+            color: #DDD;
+            text-align: center;
+            font-size: 10px;
+        }
+    </style>
+
+    <!-- 自适应 -->
+    <style>
+        /*横屏*/
+        @media all and (orientation : landscape) {
+            @media screen and (max-width: 639px) {
+                .app {
+                    width: 25%;
+                    height: 25vw;
+                }
+
+                .footerbar .app {
+                    width: 20%;
+                    height: 20vw;
+                }
+            }
+
+            @media screen and (min-width: 640px) and (max-width: 859px) {
+                .app {
+                    width: 20%;
+                    height: 20vw;
+                }
+
+                #main .footerbar .background {
+                    height: 50%;
+                }
+            }
+
+            @media screen and (min-width: 860px) and (max-width: 1349px) {
+                .app {
+                    width: 16.65%;
+                    height: 16.65vw;
+                }
+
+                #main .footerbar .background {
+                    height: 55%;
+                }
+            }
+
+            @media screen and (min-width: 1350px) and (max-width: 1899px) {
+                .app {
+                    width: 14.23%;
+                    height: 14.23vw;
+                }
+
+                #main .footerbar .background {
+                    height: 60%;
+                }
+            }
+
+            @media screen and (min-width: 1900px) {
+                .app {
+                    width: 12.5%;
+                    height: 12.5vw;
+                }
+
+                #main .footerbar .background {
+                    height: 65%;
+                }
+            }
+        }
+
+        /*竖屏*/
+        @media all and (orientation : portrait) {
+            .footerbar .app {
+                width: 20%;
+                height: 20vw;
+            }
+
+            #main .footerbar .background {
+                height: 50%;
+            }
+
+            @media screen and (max-width: 764px) {
+                .app {
+                    width: 25%;
+                    height: 25vw;
+                }
+
+            }
+
+            @media screen and (min-width: 765px) {
+                .app {
+                    width: 20%;
+                    height: 20vw;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div class="topbar">
+            <div class="right hello"></div>
+            <div class="left title"></div>
+            <div class="middle clock"></div>
+        </div>
+        <div class="content">
+            <div class="grid"></div>
+        </div>
+        <div class="footerbar">
+            <div class="grid"></div>
+            <div class="background"></div>
+            <div class="copyright">
+                <div style="visibility:hidden">Copyright © <label class="year"></label>
+                    By <label class="user"></label>. 保留所有权利。<a rel="nofollow" href="http://www.beian.miit.gov.cn"
+                        target="_blank" class="icp"></a></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        {
+            let name = /\/[^/]+\.[^/.]+($|#)/.exec(location.href);
+            if (name == null) {
+                name = ["/index."]
+            }
+            document.write(`<script src="${name[0].slice(1, name[0].indexOf("."))}.js"></sc` + "ript>");
+        }
+    </script>
+    <script>
+
+        function createAppIcon(item) {
+            const _ = s => document.createElement(s);
+            const $ = s => document.querySelector(s);
+            const body = $("body")
+            const div = _("div");
+            const span = _("span");
+            const a = _("a");
+            const strong = _("strong");
+
+            div.className = "app";
+            a.innerHTML = item.svg || `<svg t="1587648382779" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5602" width="128" height="128"><path d="M485.512533 970.888533A485.376 485.376 0 1 1 485.512533 0a485.376 485.376 0 1 1 0 970.888533z m0-212.309333a58.1632 58.1632 0 0 0 43.8272-17.476267 59.938133 59.938133 0 0 0 16.861867-43.281066 56.9344 56.9344 0 0 0-16.861867-42.325334 65.7408 65.7408 0 0 0-43.8272-18.363733c-23.620267 1.160533-40.96 11.6736-52.224 31.607467a57.412267 57.412267 0 0 0 0 59.869866c11.195733 19.933867 28.672 29.9008 52.224 29.9008z m46.4896-198.2464c0-3.549867-1.2288-13.5168-1.092266-12.0832a51.677867 51.677867 0 0 1 7.3728-34.679467 70.314667 70.314667 0 0 1 24.507733-22.254933c68.471467-40.482133 93.525333-85.538133 92.16-132.437333-2.184533-70.314667-53.930667-139.264-166.161067-140.288C394.922667 217.770667 333.2096 263.031467 318.6688 348.16a45.533867 45.533867 0 0 0 89.634133 15.36c6.690133-38.5024 28.2624-54.408533 79.598934-53.930667 56.388267 0.546133 75.229867 25.736533 76.049066 51.950934a21.845333 21.845333 0 0 1-3.413333 12.765866c-6.3488 11.264-19.933867 24.3712-44.032 38.638934a160.5632 160.5632 0 0 0-55.022933 51.746133c-20.002133 31.402667-24.3712 62.464-20.957867 94.0032 0.546133 4.778667 0.477867 4.164267 0.477867 1.6384a45.533867 45.533867 0 1 0 90.999466 0z" fill="#e6e6e6" p-id="5603"></path></svg>`;
+            a.href = item.url || "about:blank";
+            a.private_url = item.purl;
+            a.target = "_self";
+            a.onclick = e => {
+                let = url = (e.altKey ? item.purl || a.href : a.href) || "about:blank";
+                alert(url);
+                if (e.ctrlKey) {
+                    window.open(url);
+                    return false;
+                }
+                try {
+                    var rect = a.querySelector("svg").getBoundingClientRect();
+                    var div = _("div");
+                    div.style.height = rect.height + "px";
+                    div.style.width = rect.width + "px";
+                    div.style.top = rect.top + "px";
+                    div.style.left = rect.left + "px";
+                    div.innerHTML = `<svg t="1587643674524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4349" width="128" height="128" > <path d="M399.337 238.861c10.735 18.595 4.316 42.397-14.33700001 53.168-18.653 10.77-42.479 4.427-53.21299999-14.168l-90.123-156.099c-10.736-18.595-4.317-42.39799999 14.336-53.169 18.653-10.77 42.479-4.426 53.214 14.169l90.123 156.099z" fill="#c8c8c8" p-id="4350"></path><path d="M782.336 902.236c10.73500001 18.594 4.317 42.39799999-14.336 53.169-18.653 10.77-42.479 4.426-53.214-14.16799999l-90.124-156.09900001c-10.73500001-18.594-4.316-42.398 14.337-53.168 18.653-10.77 42.478-4.426 53.213 14.168l90.124 156.098z" fill="#a3a3a3" p-id="4351"></path><path d="M785.139 399.337c-18.594 10.73500001-42.398 4.316-53.168-14.33700001-10.77-18.653-4.426-42.479 14.168-53.21299999l156.098-90.12400001c18.594-10.73500001 42.399-4.316 53.168 14.33700001 10.77 18.653 4.426 42.479-14.168 53.213l-156.098 90.124z" fill="#b6b6b6" p-id="4352"></path><path d="M121.764 782.336c-18.594 10.736-42.39799999 4.317-53.169-14.336-10.77-18.654-4.426-42.479 14.169-53.214l156.099-90.123c18.594-10.73500001 42.397-4.316 53.168 14.337 10.77 18.654 4.426 42.479-14.168 53.213l-156.099 90.123z" fill="#949494" p-id="4353"></path><path d="M692.213 277.861c-10.734 18.59500001-34.56 24.938-53.21299999 14.168-18.653-10.771-25.072-34.573-14.33600001-53.168l90.123-156.099c10.734-18.59500001 34.56-24.938 53.213-14.169 18.653 10.771 25.072 34.574 14.336 53.169l-90.123 156.099z" fill="#bbbbbb" p-id="4354"></path><path d="M309.214 941.236c-10.73500001 18.594-34.561 24.93799999-53.214 14.169-18.653-10.771-25.072-34.575-14.33700001-53.168l90.12300001-156.099c10.73500001-18.594 34.561-24.93799999 53.214-14.168 18.653 10.771 25.072 34.574 14.337 53.168l-90.123 156.098z" fill="#999999" p-id="4355"></path><path d="M746.139 692.213c-18.594-10.73500001-24.938-34.56-14.168-53.21299999s34.574-25.072 53.168-14.33600001L941.237 714.787C959.831 725.522 966.175 749.347 955.405 768c-10.771 18.653-34.574 25.072-53.168 14.336l-156.098-90.123z" fill="#a9a9a9" p-id="4356"></path><path d="M82.764 309.214c-18.59500001-10.734-24.93799999-34.561-14.169-53.214 10.771-18.653 34.574-25.072 53.169-14.337l156.099 90.123C296.456 342.52100001 302.80000001 366.347 292.03 385c-10.771 18.653-34.574 25.072-53.168 14.337l-156.098-90.123z" fill="#cdcdcd" p-id="4357"></path><path d="M804.877 551c-21.471 0-38.877-17.461-38.877-39s17.406-39 38.877-39L985.123 473C1006.594 473 1024 490.461 1024 512s-17.406 39-38.877 39l-180.246 0z" fill="#afafaf" p-id="4358"></path><path d="M38.877 551c-21.471 0-38.877-17.461-38.877-39s17.406-39 38.877-39L219.123 473c21.471 0 38.877 17.461 38.877 39s-17.406 39-38.877 39l-180.246 0z" fill="#d1d1d1" p-id="4359"></path><path d="M473 804.877c0-21.471 17.461-38.877 39-38.877s39 17.406 39 38.877L551 985.123c0 21.471-17.461 38.877-39 38.877s-39-17.406-39-38.877l0-180.246z" fill="#9d9d9d" p-id="4360"></path><path d="M473 38.877c0-21.471 17.461-38.877 39-38.877s39 17.406 39 38.877L551 219.123c0 21.471-17.461 38.877-39 38.877s-39-17.406-39-38.877l0-180.246z" fill="#c2c2c2" p-id="4361"></path></svg>`;
+                    div.className = "openapp";
+                    body.appendChild(div);
+                    setTimeout(() => window.location.href = url, 100);
+
+                    let d = new Date();
+                    const x = setInterval(() => {
+                        if (new Date() - d > 200) {
+                            $(".openapp") && $(".openapp").remove();
+                            clearInterval(x);
+                        }
+                        d = new Date();
+                    }, 100);
+
+                    return true;
+                } catch (e) {
+                    console.error(e);
+                }
+            };
+            strong.innerText = item.txt || "未命名";
+
+            div.appendChild(span);
+            span.appendChild(a);
+            a.appendChild(strong);
+            return div;
+        }
+
+        (() => {
+            const $ = s => document.querySelector(s);
+            const body = $("body")
+            const openapp = $("#open-app");
+            function resize() {
+                body.style.height = window.innerHeight + "px";
+                body.style.window = window.innerWidth + "px";
+                openapp.innerHTML = `
+@keyframes open-app {
+    100% {
+        width: ${window.innerWidth}px;
+        height: ${window.innerHeight}px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+                `
+            };
+            window.onresize = resize;
+            window.ontouchend = resize;
+            window.onpageshow = () => $(".openapp") && $(".openapp").remove();
+            resize();
+
+
+            const time = $("#main .topbar .clock");
+            const weeks = ["日", "一", "二", "三", "四", "五", "六"];
+
+            function showTime() {
+                const num2 = v => ("0" + v.toString()).slice(-2);
+                const now = new Date();
+                time.innerText = `${now.getFullYear()}年${num2(now.getMonth() + 1)
+                    } 月${num2(now.getDate())} 日 ${num2(now.getHours())}: ${num2(now.getMinutes())}: ${num2(now.getSeconds())} 星期${weeks[now.getDay()]}`;
+            }
+
+            showTime();
+            setInterval(showTime, 1000);
+
+            document.title = title;
+            $("#main .topbar .title").innerText = title;
+            $("#main .topbar .hello").innerText = user && ("主人：" + user);
+            if (icp) {
+                $("#main .footerbar .year").innerText = new Date().getFullYear();
+                $("#main .footerbar .user").innerText = user;
+                $("#main .footerbar .icp").innerText = icp;
+                $("#main .footerbar .icp").parentElement.style.visibility = '';
+            }
+
+            const grid = $("#main .content .grid");
+            for (let i = 0; i < apps.length; i++) {
+                const app = createAppIcon(apps[i]);
+                grid.appendChild(app);
+            }
+
+            const pin = $("#main .footerbar .grid");
+            for (let i = 0; i < Math.min(pins.length, 4); i++) {
+                const app = createAppIcon(pins[i]);
+                pin.appendChild(app);
+            }
+
+            function ping(ip, timeout, success) {
+                var img = new Image()
+                var start = new Date().getTime()
+                img.src = /^(http)/.test(ip) ? ip + "?t=" + start : "http://" + ip + "?t=" + start
+                img.onload = function () {
+                    success && success();
+                }
+                img.onerror = function () {
+                    success && success();
+                }
+                var timer = setTimeout(() => success = null, timeout)
+            }
+
+            document.querySelectorAll(".app a").forEach(a => {
+                const purl = a.private_url;
+                if (purl) {
+                    ping(purl, 1000, () => a.href = purl);
+                }
+            });
+
+        })();
+    </script>
+</body>
+
+</html>
