@@ -493,11 +493,19 @@
 
             div.className = "app";
             a.innerHTML = item.svg || `<svg t="1587648382779" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5602" width="128" height="128"><path d="M485.512533 970.888533A485.376 485.376 0 1 1 485.512533 0a485.376 485.376 0 1 1 0 970.888533z m0-212.309333a58.1632 58.1632 0 0 0 43.8272-17.476267 59.938133 59.938133 0 0 0 16.861867-43.281066 56.9344 56.9344 0 0 0-16.861867-42.325334 65.7408 65.7408 0 0 0-43.8272-18.363733c-23.620267 1.160533-40.96 11.6736-52.224 31.607467a57.412267 57.412267 0 0 0 0 59.869866c11.195733 19.933867 28.672 29.9008 52.224 29.9008z m46.4896-198.2464c0-3.549867-1.2288-13.5168-1.092266-12.0832a51.677867 51.677867 0 0 1 7.3728-34.679467 70.314667 70.314667 0 0 1 24.507733-22.254933c68.471467-40.482133 93.525333-85.538133 92.16-132.437333-2.184533-70.314667-53.930667-139.264-166.161067-140.288C394.922667 217.770667 333.2096 263.031467 318.6688 348.16a45.533867 45.533867 0 0 0 89.634133 15.36c6.690133-38.5024 28.2624-54.408533 79.598934-53.930667 56.388267 0.546133 75.229867 25.736533 76.049066 51.950934a21.845333 21.845333 0 0 1-3.413333 12.765866c-6.3488 11.264-19.933867 24.3712-44.032 38.638934a160.5632 160.5632 0 0 0-55.022933 51.746133c-20.002133 31.402667-24.3712 62.464-20.957867 94.0032 0.546133 4.778667 0.477867 4.164267 0.477867 1.6384a45.533867 45.533867 0 1 0 90.999466 0z" fill="#e6e6e6" p-id="5603"></path></svg>`;
-            a.href = item.url || "about:blank";
+            a.public_url = item.url || "about:blank";
             a.private_url = item.purl;
             a.target = "_self";
             a.onclick = e => {
+
+                if (a.attributes["href"].value[0] === '#') {
+                    window.location.hash = a.attributes["href"].value;
+                    window.location.reload();
+                    return false;
+                }
+
                 let = url = (e.altKey ? item.purl || a.href : a.href) || "about:blank";
+
                 if (e.ctrlKey) {
                     window.open(url);
                     return false;
@@ -575,7 +583,10 @@
             setInterval(showTime, 1000);
 
             document.title = title;
-            $("#main .topbar .title").innerText = title;
+            if (window.location.hash === '#private') {
+                document.title += `(内网)`;
+            }
+            $("#main .topbar .title").innerText = document.title;
             $("#main .topbar .hello").innerText = user && ("主人：" + user);
             if (icp) {
                 $("#main .footerbar .year").innerText = new Date().getFullYear();
@@ -597,6 +608,13 @@
             }
 
             function ping(ip, timeout, success) {
+                if (window.location.hash === '#private') {
+                    success && success();
+                    return;
+                }
+                if (ip[0] === '#') {
+                    return;
+                }
                 var img = new Image()
                 var start = new Date().getTime()
                 img.src = /^(http)/.test(ip) ? ip + "?t=" + start : "http://" + ip + "?t=" + start
@@ -610,12 +628,12 @@
             }
 
             document.querySelectorAll(".app a").forEach(a => {
+                a.href = a.public_url;
                 const purl = a.private_url;
                 if (purl) {
                     ping(purl, 1000, () => a.href = purl);
                 }
             });
-
         })();
     </script>
 </body>
